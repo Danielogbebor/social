@@ -47,9 +47,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
               OutlinedButton(
                 onPressed: () {
-                  if (kDebugMode) {
-                    print("continue");
-                  }
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      Routes.registerPage, (route) => false);
                 },
                 child: const Text(
                   "Continue",

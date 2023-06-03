@@ -3,7 +3,9 @@ import 'package:social/individualwidgets.dart';
 import 'package:social/pages/register.dart';
 
 class Verification extends StatefulWidget {
-  const Verification({super.key});
+  final String id;
+  final String phoneNumber;
+  const Verification({super.key, required this.id, required this.phoneNumber});
 
   @override
   State<Verification> createState() => _VerificationState();

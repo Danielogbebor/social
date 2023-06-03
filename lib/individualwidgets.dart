@@ -1,4 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:social/pages/register.dart';
+import 'package:social/pages/userinfo.dart';
+import 'package:social/pages/verification.dart';
+import 'package:social/pages/welcome.dart';
 
 // privacy policy
 class privacy_policy extends StatelessWidget {
@@ -229,5 +235,43 @@ showAlertDialog({
   );
 }
 
-// icon button
+// Page Route
 
+class Routes {
+  static const String welcomePage = "welcome";
+  static const String registerPage = "Register";
+  static const String verificationPage = "verification";
+  static const String userInfoPage = "userInfo";
+
+  static MaterialPageRoute<dynamic> pageRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case welcomePage:
+        return MaterialPageRoute(
+          builder: (context) => const WelcomePage(),
+        );
+      case registerPage:
+        return MaterialPageRoute(
+          builder: (context) => const RegisterPage(),
+        );
+      case verificationPage:
+        final Map args = settings.arguments as Map;
+        return MaterialPageRoute(
+          builder: (context) => Verification(
+            id: args["id"],
+            phoneNumber: args["phoneNumber"],
+          ),
+        );
+      case userInfoPage:
+        return MaterialPageRoute(
+          builder: (context) => const UserInfo(),
+        );
+
+      default:
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            backgroundColor: Colors.amber,
+          ),
+        );
+    }
+  }
+}
