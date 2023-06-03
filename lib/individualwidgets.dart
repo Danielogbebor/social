@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:social/pages/register.dart';
 import 'package:social/pages/userinfo.dart';
