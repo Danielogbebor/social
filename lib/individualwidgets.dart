@@ -1,0 +1,233 @@
+import 'package:flutter/material.dart';
+
+// privacy policy
+class privacy_policy extends StatelessWidget {
+  const privacy_policy({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: RichText(
+          textAlign: TextAlign.center,
+          text: const TextSpan(
+              text: "Read our ",
+              style: TextStyle(height: 1.5, color: Colors.black),
+              children: [
+                TextSpan(
+                    text: "privacy policy,",
+                    style:
+                        TextStyle(color: Color.fromARGB(255, 255, 252, 252))),
+                TextSpan(text: "By continuing you agreee with our "),
+                TextSpan(
+                    text: "Terms and Condition.",
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)))
+              ])),
+    );
+  }
+}
+// language selection
+
+class LanguageSelection extends StatelessWidget {
+  const LanguageSelection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.grey,
+      borderRadius: BorderRadius.circular(6),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: InkWell(
+          onTap: () {
+            showModalBottomSheet(
+              backgroundColor: Colors.grey,
+              context: context,
+              builder: (context) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 214, 214, 214),
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 10,
+                        width: 60,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(Icons.cancel)),
+                          const SizedBox(
+                            width: 115,
+                          ),
+                          const Text(
+                            "Languages",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
+                    RadioListTile(
+                      activeColor: Colors.black,
+                      value: true,
+                      groupValue: false,
+                      onChanged: (value) {},
+                      title: const Text("English"),
+                      subtitle: const Text("(Phone Language)"),
+                    ),
+                    RadioListTile(
+                      activeColor: Colors.black,
+                      value: true,
+                      groupValue: false,
+                      onChanged: (value) {},
+                      title: const Text("Spanish"),
+                      subtitle: const Text("(Phone Language)"),
+                    ),
+                    RadioListTile(
+                      activeColor: Colors.black,
+                      value: true,
+                      groupValue: false,
+                      onChanged: (value) {},
+                      title: const Text("Italian"),
+                      subtitle: const Text("(Phone Language)"),
+                    )
+                  ],
+                );
+              },
+            );
+          },
+          borderRadius: BorderRadius.circular(20),
+          // splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.grey,
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.language,
+                color: Colors.black,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text("English"),
+              SizedBox(
+                width: 5,
+              ),
+              Icon(
+                Icons.keyboard_arrow_down,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+// textfield
+
+class MyTextfield extends StatelessWidget {
+  final void Function()? onTap;
+  final TextEditingController? controller;
+  final bool? readOnly;
+  final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+  final String? prefixText;
+  final Widget? suffixIcon;
+  final String? hintText;
+  final TextAlign textAlign;
+
+  final Widget? prefix;
+  const MyTextfield({
+    Key? key,
+    this.onTap,
+    this.controller,
+    this.readOnly,
+    this.keyboardType,
+    this.onChanged,
+    this.prefixText,
+    this.suffixIcon,
+    this.hintText,
+    required this.textAlign,
+    this.prefix,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onTap: onTap,
+      controller: controller,
+      readOnly: readOnly ?? false,
+      keyboardType: keyboardType,
+      //
+      onChanged: onChanged,
+      textAlign: textAlign,
+      decoration: InputDecoration(
+          prefixText: prefixText,
+          suffixIcon: suffixIcon,
+          hintText: hintText,
+          prefix: prefix,
+          hintStyle: const TextStyle(color: Colors.white),
+          isDense: true,
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.black))),
+    );
+  }
+}
+
+// alert dialog
+
+showAlertDialog({
+  required BuildContext context,
+  required String message,
+}) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        backgroundColor: Colors.grey,
+        content: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Text(
+            message,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text(
+              "OK",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+// icon button
+
