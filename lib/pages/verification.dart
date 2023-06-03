@@ -65,7 +65,7 @@ class _VerificationState extends State<Verification> {
                   ]),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Padding(
@@ -77,14 +77,14 @@ class _VerificationState extends State<Verification> {
               keyboardType: TextInputType.number,
             ),
           ),
-          SizedBox(height: 10),
-          Text("Enter 6-digits code"),
-          SizedBox(height: 40),
+          const SizedBox(height: 10),
+          const Text("Enter 6-digits code"),
+          const SizedBox(height: 40),
           GestureDetector(
             onTap: () {
               print("resend sms");
             },
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.message),
@@ -94,14 +94,14 @@ class _VerificationState extends State<Verification> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           GestureDetector(
             onTap: () {
               print("request a phone call");
             },
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.phone),

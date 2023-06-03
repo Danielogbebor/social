@@ -33,6 +33,7 @@ dependencies:
 
   flutter_native_splash: ^2.3.0
   country_picker: ^2.0.20
+  firebase_auth: ^4.6.2
 
 
 flutter_native_splash:

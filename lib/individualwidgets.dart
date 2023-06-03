@@ -154,7 +154,7 @@ class MyTextfield extends StatelessWidget {
   final String? prefixText;
   final Widget? suffixIcon;
   final String? hintText;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
   final Widget? prefix;
   const MyTextfield({
@@ -180,7 +180,7 @@ class MyTextfield extends StatelessWidget {
       keyboardType: keyboardType,
       //
       onChanged: onChanged,
-      textAlign: textAlign,
+      textAlign: textAlign ?? TextAlign.center,
       decoration: InputDecoration(
           prefixText: prefixText,
           suffixIcon: suffixIcon,
