@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social/auth.dart';
 
 import '../individualwidgets.dart';
+import 'home.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({
@@ -14,6 +17,8 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    // final ap = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.grey,
       body: Column(children: <Widget>[
@@ -44,19 +49,23 @@ class _WelcomePageState extends State<WelcomePage> {
                 height: 30,
               ),
 
-              OutlinedButton(
+              MyButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.registerPage, (route) => false);
+                  Provider.of<AuthProvider>(context, listen: false)
+                              .isSignedIn ==
+                          true
+                      //get sharedpref
+                      ? Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Home()))
+                      // : Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => RegisterPage(),
+                      //     ));
+                      : Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.registerPage, (route) => false);
                 },
-                child: const Text(
-                  "Continue",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2),
-                ),
+                text: "Get started",
               ),
               // ),
               const SizedBox(

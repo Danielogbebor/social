@@ -35,6 +35,10 @@ dependencies:
   country_picker: ^2.0.20
   firebase_auth: ^4.6.2
   firebase_core: ^2.13.1
+  cloud_firestore: ^4.8.0
+  provider: ^6.0.5
+  shared_preferences: ^2.1.2
+  pinput: ^2.2.31
 
 
 flutter_native_splash:

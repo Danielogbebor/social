@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social/auth.dart';
 
 import '../individualwidgets.dart';
 
@@ -13,13 +15,13 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  late TextEditingController countryNameController;
+  // late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
 
   @override
   void initState() {
-    countryNameController = TextEditingController();
+    // countryNameController = TextEditingController();
     countryCodeController = TextEditingController();
     phoneNumberController = TextEditingController();
     // TODO: implement initState
@@ -28,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-    countryNameController.dispose();
+    // countryNameController.dispose();
     countryCodeController.dispose();
     phoneNumberController.dispose();
     // TODO: implement dispose
@@ -73,27 +75,36 @@ class _RegisterPageState extends State<RegisterPage> {
               )),
         ),
         onSelect: (Country country) {
-          countryNameController.text = country.name;
+          // countryNameController.text = country.name;
           countryCodeController.text = country.phoneCode;
         });
   }
 
-  void sendConfirmationCode() {
+  Future<void> sendConfirmationCode() async {
     final phone = phoneNumberController.text;
+    final countryCode = countryCodeController.text;
     if (phone.isEmpty) {
       return showAlertDialog(
-          context: context, message: "Please proovide a valid phone number");
+          context: context, message: "Please provide a valid phone number");
     } else if (phone.length < 9) {
       return showAlertDialog(
-          context: context, message: "Please proovide a valid phone number");
+          context: context, message: "Please provide a valid phone number");
     } else if (phone.length > 10) {
       return showAlertDialog(
-          context: context, message: "Please proovide a valid phone number");
+          context: context, message: "Please provide a valid phone number");
+    } else if (countryCode.isEmpty) {
+      return showAlertDialog(
+          context: context, message: "Please provide a valid Country Code");
+    } else {
+      final ap = Provider.of<AuthProvider>(context, listen: false);
+      String phoneNumber = phoneNumberController.text.trim();
+      ap.signInWithPhone(context, "+$countryCode$phoneNumber");
+      showLoadingDialog(
+        context: context,
+        message: "Sending a verification code to +$countryCode$phoneNumber",
+      );
     }
-
-    // final name = countryNameController.text;
-    // final code = countryCodeController.text;
-    //
+    // if (context.mounted) Navigator.pop(context);
   }
 
   @override
@@ -107,18 +118,14 @@ class _RegisterPageState extends State<RegisterPage> {
           "Enter Phone Number",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [
-          MyIcon(
-            onPressed: () {
-              print("object");
-            },
-            iconColor: Colors.black,
-            icon: const Icon(Icons.more_vert),
-          )
-        ],
       ),
       body: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(
+            height: 50,
+          ),
+          SizedBox(height: 150, child: Image.asset("assets/dial.png")),
           const SizedBox(
             height: 50,
           ),
@@ -138,17 +145,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   ]),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 70, left: 70),
-            child: MyTextfield(
-              onTap: showCountryCodePicker,
-              prefix: const Icon(Icons.language),
-              readOnly: true,
-              suffixIcon: const Icon(Icons.arrow_drop_down),
-              controller: countryNameController,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 70, left: 70),
+          //   child: MyTextfield(
+          //     onTap: showCountryCodePicker,
+          //     prefix: const Icon(Icons.language),
+          //     readOnly: true,
+          //     suffixIcon: const Icon(Icons.arrow_drop_down),
+          //     controller: countryNameController,
+          //     textAlign: TextAlign.center,
+          //   ),
+          // ),
           const SizedBox(
             height: 30,
           ),
@@ -184,41 +191,12 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(height: 30),
           const Text("Carrier charges may apply"),
           const SizedBox(height: 80),
-          OutlinedButton(
+          MyButton(
             onPressed: sendConfirmationCode,
-            child: const Text(
-              "Next",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2),
-            ),
+            text: "Next",
           ),
         ],
       ),
-    );
-  }
-}
-
-class MyIcon extends StatelessWidget {
-  final Widget icon;
-  final void Function()? onPressed;
-  final Color? iconColor;
-
-  const MyIcon({
-    Key? key,
-    this.onPressed,
-    required this.icon,
-    this.iconColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onPressed,
-      icon: icon,
-      color: iconColor,
     );
   }
 }

@@ -49,5 +49,17 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>com.example.social</string> <!-- Replace with your app's bundle identifier -->
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>app-1-359896430092-ios-9f079c8b58aed9272d6029</string> <!-- Replace with your custom URL scheme -->
+    </array>
+  </dict>
+</array>
+
 	</dict>
 </plist>

@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:social/pages/home.dart';
 import 'package:social/pages/register.dart';
 import 'package:social/pages/userinfo.dart';
 import 'package:social/pages/verification.dart';
@@ -253,10 +256,11 @@ class Routes {
         );
       case verificationPage:
         final Map args = settings.arguments as Map;
+
         return MaterialPageRoute(
           builder: (context) => Verification(
-            id: args["id"],
-            phoneNumber: args["phoneNumber"],
+            smsCode: args["smsCode"],
+            // phoneNumber: args["phoneNumber"],
           ),
         );
       case userInfoPage:
@@ -265,11 +269,92 @@ class Routes {
         );
 
       default:
-        return MaterialPageRoute(
-          builder: (context) => const Scaffold(
-            backgroundColor: Colors.amber,
-          ),
-        );
+        return MaterialPageRoute(builder: (context) => const Home());
     }
   }
 }
+// show loadingdialog
+
+showLoadingDialog({
+  required BuildContext context,
+  required String message,
+}) async {
+  return await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                const CircularProgressIndicator(color: Colors.greenAccent),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Text(
+                    message,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+class MyButton extends StatelessWidget {
+  final Function()? onPressed;
+  String text;
+  MyButton({
+    Key? key,
+    this.onPressed,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2),
+      ),
+    );
+  }
+}
+
+//custome icon
+
+// class MyIcon extends StatelessWidget {
+//   final Widget icon;
+//   final void Function()? onPressed;
+//   final Color? iconColor;
+
+//   const MyIcon({
+//     Key? key,
+//     this.onPressed,
+//     required this.icon,
+//     this.iconColor,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return IconButton(
+//       onPressed: onPressed,
+//       icon: icon,
+//       color: iconColor,
+//     );
+//   }
+// }

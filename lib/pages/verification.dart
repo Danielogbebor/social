@@ -1,32 +1,22 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import 'package:social/individualwidgets.dart';
-import 'package:social/pages/register.dart';
 
 class Verification extends StatefulWidget {
-  final String id;
-  final String phoneNumber;
-  const Verification({super.key, required this.id, required this.phoneNumber});
+  final String smsCode;
+  // final int phoneNumber;
+  const Verification({
+    super.key,
+    required this.smsCode,
+    // required this.phoneNumber
+  });
 
   @override
   State<Verification> createState() => _VerificationState();
 }
 
 class _VerificationState extends State<Verification> {
-  late final TextEditingController codeController;
-  @override
-  void initState() {
-    codeController = TextEditingController();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    codeController = TextEditingController();
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,30 +25,20 @@ class _VerificationState extends State<Verification> {
           elevation: 0,
           backgroundColor: Colors.grey,
           title: const Text(
-            "Verify your number",
+            "Verification",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          actions: [
-            MyIcon(
-              onPressed: () {
-                print("object");
-              },
-              iconColor: Colors.black,
-              icon: const Icon(Icons.more_vert),
-            ),
-          ],
         ),
         body: Column(children: [
           const SizedBox(
             height: 50,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             child: RichText(
               textAlign: TextAlign.center,
               text: const TextSpan(
-                  text:
-                      "Your verification code has been sent to +447534428807. Wait for a minute before requesting another sms or call with code. ",
+                  text: "Enter the OTP that has been sent to your phone \n ",
                   style: TextStyle(color: Colors.black, height: 1.5),
                   children: [
                     TextSpan(
@@ -71,16 +51,30 @@ class _VerificationState extends State<Verification> {
             height: 40,
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 80, left: 80),
-            child: MyTextfield(
-              textAlign: TextAlign.center,
-              controller: codeController,
-              hintText: "-  -  -   -  -  -",
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Pinput(
               keyboardType: TextInputType.number,
+              length: 6,
+              onChanged: (value) {},
+              defaultPinTheme: PinTheme(
+                  width: 60,
+                  height: 60,
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10))),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           const Text("Enter 6-digits code"),
+          const SizedBox(height: 40),
+          MyButton(
+            text: "Verify",
+            onPressed: () {
+              print("verify");
+            },
+          ),
           const SizedBox(height: 40),
           GestureDetector(
             onTap: () {
@@ -91,7 +85,10 @@ class _VerificationState extends State<Verification> {
               children: [
                 Icon(Icons.message),
                 SizedBox(width: 10),
-                Text("Resend SMS"),
+                Text(
+                  "Resend SMS",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 40),
               ],
             ),
@@ -108,7 +105,10 @@ class _VerificationState extends State<Verification> {
               children: [
                 Icon(Icons.phone),
                 SizedBox(width: 10),
-                Text("Request a call"),
+                Text(
+                  "Request a call",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           )
