@@ -259,7 +259,7 @@ class Routes {
 
         return MaterialPageRoute(
           builder: (context) => Verification(
-            smsCode: args["smsCode"],
+            smsId: args["smsCode"],
             // phoneNumber: args["phoneNumber"],
           ),
         );
@@ -355,6 +355,59 @@ class MyButton extends StatelessWidget {
 //       onPressed: onPressed,
 //       icon: icon,
 //       color: iconColor,
+//     );
+//   }
+// }
+
+
+// // toggle btwn login and register page
+// class LoginRegister extends StatefulWidget {
+//   const LoginRegister({super.key});
+
+//   @override
+//   State<LoginRegister> createState() => _LoginRegisterState();
+// }
+
+// class _LoginRegisterState extends State<LoginRegister> {
+//   bool showLogin = true;
+//   void togglePages() {
+//     setState(() {
+//       showLogin = !showLogin;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     if (showLogin) {
+//       return Login(
+//         onTap: togglePages,
+//       );
+//     } else {
+//       return Register(
+//         onTap: togglePages,
+//       );
+//     }
+//   }
+// }
+
+// // authentication if already logged in
+// class Authentication extends StatelessWidget {
+//   const Authentication({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: StreamBuilder(
+//         stream: FirebaseAuth.instance.authStateChanges(),
+//         builder: (context, snapshot) {
+//           // login
+//           if (snapshot.hasData) {
+//             return const HomePage();
+//           } else {
+//             return const LoginRegister();
+//           }
+//         },
+//       ),
 //     );
 //   }
 // }

@@ -6,7 +6,6 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController;
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
