@@ -1,5 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:social/pages/home.dart';
 import 'package:social/pages/register.dart';
@@ -309,6 +313,7 @@ showLoadingDialog({
     },
   );
 }
+// custom button
 
 class MyButton extends StatelessWidget {
   final Function()? onPressed;
@@ -335,60 +340,22 @@ class MyButton extends StatelessWidget {
   }
 }
 
-//custome icon
-
-// class MyIcon extends StatelessWidget {
-//   final Widget icon;
-//   final void Function()? onPressed;
-//   final Color? iconColor;
-
-//   const MyIcon({
-//     Key? key,
-//     this.onPressed,
-//     required this.icon,
-//     this.iconColor,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return IconButton(
-//       onPressed: onPressed,
-//       icon: icon,
-//       color: iconColor,
-//     );
-//   }
-// }
+//  pickimage function
+Future<File?> pickImage(BuildContext context) async {
+  File? image;
+  try {
+    final pickImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickImage != null) {
+      image = File(pickImage.path);
+    }
+  } catch (e) {
+    showAlertDialog(context: context, message: e.toString());
+  }
+  return image;
+}
 
 
-// // toggle btwn login and register page
-// class LoginRegister extends StatefulWidget {
-//   const LoginRegister({super.key});
-
-//   @override
-//   State<LoginRegister> createState() => _LoginRegisterState();
-// }
-
-// class _LoginRegisterState extends State<LoginRegister> {
-//   bool showLogin = true;
-//   void togglePages() {
-//     setState(() {
-//       showLogin = !showLogin;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     if (showLogin) {
-//       return Login(
-//         onTap: togglePages,
-//       );
-//     } else {
-//       return Register(
-//         onTap: togglePages,
-//       );
-//     }
-//   }
-// }
 
 // // authentication if already logged in
 // class Authentication extends StatelessWidget {

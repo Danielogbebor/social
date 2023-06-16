@@ -1,11 +1,51 @@
-import 'package:flutter/material.dart';
-import 'package:social/individualwidgets.dart';
+import 'dart:io';
 
-class UserInfo extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social/auth.dart';
+import 'package:social/individualwidgets.dart';
+import 'package:social/pages/model.dart';
+
+class UserInfo extends StatefulWidget {
   const UserInfo({super.key});
 
   @override
+  State<UserInfo> createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
+  File? image;
+  final nameController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    nameController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    void uploadData() {
+      final ap = Provider.of<AuthProvider>(context, listen: false);
+      UserModel userModel = UserModel(
+        name: nameController.text.trim(),
+        profilePhoto: " ",
+        uid: " ",
+        phoneNumber: " ",
+        createdAt: " ",
+      );
+      if (image != null) {
+        ap.saveUserData(
+          context: context,
+          onSuccess: () {},
+          userModel: userModel,
+          profilePhoto: image!,
+        );
+      } else {
+        showAlertDialog(context: context, message: "Add profile Photo");
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -27,27 +67,33 @@ class UserInfo extends StatelessWidget {
         const SizedBox(
           height: 50,
         ),
-        Container(
-          decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color.fromARGB(255, 112, 112, 112)),
-          child: GestureDetector(
-            onTap: () {
-              print("add image");
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Icon(
-                Icons.add_a_photo,
-                size: 45,
-              ),
-            ),
-          ),
+        Column(
+          children: [
+            InkWell(
+              child: image == null
+                  ? CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        size: 40,
+                      ),
+                      radius: 50,
+                    )
+                  : CircleAvatar(
+                      backgroundImage: FileImage(image!),
+                      radius: 50,
+                    ),
+              onTap: () async {
+                image = await pickImage(context);
+                setState(() {});
+              },
+            )
+          ],
         ),
         const SizedBox(
           height: 50,
         ),
-        const Row(
+        Row(
           children: [
             Expanded(
               child: Padding(
@@ -55,13 +101,26 @@ class UserInfo extends StatelessWidget {
                 child: MyTextfield(
                   textAlign: TextAlign.left,
                   hintText: "Enter your name ",
-                  controller: null,
+                  controller: nameController,
+                  keyboardType: TextInputType.name,
+                  suffixIcon: Icon(
+                    Icons.emoji_emotions,
+                    size: 30,
+                  ),
 
                   // nameController,
                 ),
               ),
             )
           ],
+        ),
+        SizedBox(height: 60),
+        MyButton(
+          text: "Next",
+          onPressed: () {
+            uploadData();
+            print("next");
+          },
         )
       ])),
     );

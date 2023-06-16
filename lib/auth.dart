@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social/individualwidgets.dart';
+import 'package:social/pages/model.dart';
 import 'package:social/pages/verification.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -15,7 +20,7 @@ class AuthProvider extends ChangeNotifier {
 
   // initialise firebase
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   AuthProvider() {
     checkSingnedIn();
@@ -96,6 +101,28 @@ class AuthProvider extends ChangeNotifier {
       print("user exist");
       return false;
     }
+  }
+
+  void saveUserData({
+    required BuildContext context,
+    required UserModel userModel,
+    required File profilePhoto,
+    required Function onSuccess,
+  }) async {
+    _isLoading = false;
+    notifyListeners();
+    try {} on FirebaseAuthException catch (e) {
+      showAlertDialog(context: context, message: e.toString());
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<String> storeFileToStorage(String ref, File file) async {
+    UploadTask uploadTask = _firebaseStorage.ref().child(ref).putFile(file);
+    TaskSnapshot snapshot = await uploadTask;
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
   }
 }
 
