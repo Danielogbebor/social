@@ -3,6 +3,7 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
 import 'package:social/individualwidgets.dart';
+import 'package:social/pages/home.dart';
 import 'package:social/pages/userinfo.dart';
 
 class Verification extends StatefulWidget {
@@ -29,6 +30,13 @@ class _VerificationState extends State<Verification> {
       onSuccess: () {
         ap.checkForExistingUser().then((value) async {
           if (value == true) {
+            ap.getDataFromFirebaseFirestore().then((value) => ap
+                .userDataFromSP()
+                .then((value) => ap.setSignIn().then((value) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    )))));
           } else {
             Navigator.pushAndRemoveUntil(
                 context,

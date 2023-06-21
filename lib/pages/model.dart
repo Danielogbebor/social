@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
-  final String name;
-  final String profilePhoto;
-  final String uid;
-  final String phoneNumber;
-  final String createdAt;
+  String name;
+  String profilePhoto;
+  String uid;
+  String phoneNumber;
+  String createdAt;
+  String bio;
   // add bio
   UserModel({
     required this.name,
@@ -12,15 +13,17 @@ class UserModel {
     required this.uid,
     required this.phoneNumber,
     required this.createdAt,
+    required this.bio,
   });
   // mapping from firebase
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       name: map["name"] ?? " ",
-      createdAt: map["createdAt"] ?? " ",
+      uid: map["uid"] ?? " ",
       profilePhoto: map["profilePhoto"] ?? " ",
       phoneNumber: map["phoneNumber"] ?? " ",
-      uid: map["uid"] ?? " ",
+      createdAt: map["createdAt"] ?? " ",
+      bio: map["bio"] ?? " ",
     );
   }
   //  mapping to firebase
@@ -31,6 +34,7 @@ class UserModel {
       "profilePhoto": profilePhoto,
       "phoneNumber": phoneNumber,
       "createdAt": createdAt,
+      'bio': bio,
     };
   }
 }

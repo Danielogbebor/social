@@ -1,12 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/firebase_options.dart';
+import 'package:social/pages/home.dart';
 
 import 'package:social/pages/welcome.dart';
 
 import 'auth.dart';
-import 'individualwidgets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,29 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const WelcomePage(),
-        onGenerateRoute: Routes.pageRoute,
+        // onGenerateRoute: Routes.pageRoute,
+      ),
+    );
+  }
+}
+
+// authentication if already logged in
+class Authentication extends StatelessWidget {
+  const Authentication({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          // login
+          if (snapshot.hasData) {
+            return const Home();
+          } else {
+            return const WelcomePage();
+          }
+        },
       ),
     );
   }

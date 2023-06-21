@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
+import 'package:social/pages/register.dart';
 
 import '../individualwidgets.dart';
 import 'home.dart';
@@ -17,7 +18,7 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-    // final ap = Provider.of<AuthProvider>(context, listen: false);
+    final ap = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.grey,
@@ -50,20 +51,20 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
 
               MyButton(
-                onPressed: () {
-                  Provider.of<AuthProvider>(context, listen: false)
-                              .isSignedIn ==
-                          true
-                      //get sharedpref
-                      ? Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Home()))
-                      // : Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => RegisterPage(),
-                      //     ));
-                      : Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.registerPage, (route) => false);
+                onPressed: () async {
+                  if (ap.isSignedIn == true) {
+                    await ap.getDataSP().whenComplete(() => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Home(),
+                        )));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterPage(),
+                        ));
+                  }
                 },
                 text: "Get started",
               ),

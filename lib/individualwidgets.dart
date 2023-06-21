@@ -240,43 +240,43 @@ showAlertDialog({
   );
 }
 
-// Page Route
+// // Page Route
 
-class Routes {
-  static const String welcomePage = "welcome";
-  static const String registerPage = "Register";
-  static const String verificationPage = "verification";
-  static const String userInfoPage = "userInfo";
+// class Routes {
+//   static const String welcomePage = "welcome";
+//   static const String registerPage = "Register";
+//   static const String verificationPage = "verification";
+//   static const String userInfoPage = "userInfo";
 
-  static MaterialPageRoute<dynamic> pageRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case welcomePage:
-        return MaterialPageRoute(
-          builder: (context) => const WelcomePage(),
-        );
-      case registerPage:
-        return MaterialPageRoute(
-          builder: (context) => const RegisterPage(),
-        );
-      case verificationPage:
-        final Map args = settings.arguments as Map;
+//   static MaterialPageRoute<dynamic> pageRoute(RouteSettings settings) {
+//     switch (settings.name) {
+//       case welcomePage:
+//         return MaterialPageRoute(
+//           builder: (context) => const WelcomePage(),
+//         );
+//       case registerPage:
+//         return MaterialPageRoute(
+//           builder: (context) => const RegisterPage(),
+//         );
+//       case verificationPage:
+//         final Map args = settings.arguments as Map;
 
-        return MaterialPageRoute(
-          builder: (context) => Verification(
-            smsId: args["smsCode"],
-            // phoneNumber: args["phoneNumber"],
-          ),
-        );
-      case userInfoPage:
-        return MaterialPageRoute(
-          builder: (context) => const UserInfo(),
-        );
+//         return MaterialPageRoute(
+//           builder: (context) => Verification(
+//             smsId: args["smsCode"],
+//             // phoneNumber: args["phoneNumber"],
+//           ),
+//         );
+//       case userInfoPage:
+//         return MaterialPageRoute(
+//           builder: (context) => const UserInfo(),
+//         );
 
-      default:
-        return MaterialPageRoute(builder: (context) => const Home());
-    }
-  }
-}
+//       default:
+//         return MaterialPageRoute(builder: (context) => const Home());
+//     }
+//   }
+// }
 // show loadingdialog
 
 showLoadingDialog({
@@ -354,27 +354,3 @@ Future<File?> pickImage(BuildContext context) async {
   }
   return image;
 }
-
-
-
-// // authentication if already logged in
-// class Authentication extends StatelessWidget {
-//   const Authentication({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: StreamBuilder(
-//         stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           // login
-//           if (snapshot.hasData) {
-//             return const HomePage();
-//           } else {
-//             return const LoginRegister();
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
