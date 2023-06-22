@@ -35,7 +35,7 @@ class _VerificationState extends State<Verification> {
                 .then((value) => ap.setSignIn().then((value) => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Home(),
+                      builder: (context) => HiddenDrawer(),
                     )))));
           } else {
             Navigator.pushAndRemoveUntil(

@@ -1,15 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:social/pages/callspage.dart';
+import 'package:social/pages/chatpage.dart';
 import 'package:social/pages/home.dart';
-import 'package:social/pages/register.dart';
+import 'package:social/pages/settingspage.dart';
 import 'package:social/pages/userinfo.dart';
-import 'package:social/pages/verification.dart';
-import 'package:social/pages/welcome.dart';
 
 // privacy policy
 class privacy_policy extends StatelessWidget {
@@ -354,3 +354,72 @@ Future<File?> pickImage(BuildContext context) async {
   }
   return image;
 }
+
+// drawer menu
+class HiddenDrawer extends StatefulWidget {
+  const HiddenDrawer({super.key});
+
+  @override
+  State<HiddenDrawer> createState() => _HiddenDrawerState();
+}
+
+class _HiddenDrawerState extends State<HiddenDrawer> {
+  List<ScreenHiddenDrawer> _pages = [];
+  final myBaseStyle =
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white);
+  final mySelectedStyle =
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white);
+  @override
+  void initState() {
+    _pages = [
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+            name: "Social",
+            baseStyle: myBaseStyle,
+            selectedStyle: mySelectedStyle,
+            colorLineSelected: Colors.white),
+        Home(),
+      ),
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+            name: "Chats",
+            baseStyle: myBaseStyle,
+            selectedStyle: mySelectedStyle,
+            colorLineSelected: Colors.white),
+        ChatPage(),
+      ),
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+            name: "Calls",
+            baseStyle: myBaseStyle,
+            selectedStyle: mySelectedStyle,
+            colorLineSelected: Colors.white),
+        CallsPage(),
+      ),
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
+            name: "Settings",
+            baseStyle: myBaseStyle,
+            selectedStyle: mySelectedStyle,
+            colorLineSelected: Colors.white),
+        SettingsPage(),
+      )
+    ];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return HiddenDrawerMenu(
+      backgroundColorMenu: Colors.grey.shade600,
+      screens: _pages,
+      initPositionSelected: 0,
+      backgroundColorAppBar: Colors.grey,
+      slidePercent: 50,
+      contentCornerRadius: 40,
+      curveAnimation: Curves.bounceIn,
+    );
+  }
+}
+
+// drawer default

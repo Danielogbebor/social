@@ -41,6 +41,7 @@ dependencies:
   pinput: ^2.2.31
   image_picker: ^0.8.9
   firebase_storage: ^11.2.3
+  hidden_drawer_menu: ^3.0.1
 
 
 flutter_native_splash:

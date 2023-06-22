@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:social/pages/welcome.dart';
 
 import '../auth.dart';
 
@@ -17,21 +16,25 @@ class _HomeState extends State<Home> {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.amber,
-      appBar: AppBar(
-        title: Text("Home"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                ap.signOut().then((value) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const WelcomePage(),
-                    )));
-              },
-              icon: Icon(Icons.logout))
-        ],
-      ),
-      body: Center(
+      // appBar: AppBar(
+      //   title: Text("Social"),
+      // actions: [
+      //   IconButton(
+      //       onPressed: () {
+      //         ap.signOut().then((value) => Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //               builder: (context) => const WelcomePage(),
+      //             )));
+      //       },
+      //       icon: Icon(Icons.logout))
+      // ],
+      // ),
+      body:
+
+          //
+
+          Center(
         child: Column(
           children: [
             Text(ap.userModel.name),

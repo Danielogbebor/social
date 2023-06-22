@@ -29,14 +29,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const WelcomePage(),
-        // onGenerateRoute: Routes.pageRoute,
-      ),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const WelcomePage()
+          // onGenerateRoute: Routes.pageRoute,
+          ),
     );
   }
 }

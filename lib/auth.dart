@@ -130,7 +130,7 @@ class AuthProvider extends ChangeNotifier {
       await storeFileToStorage("profilePhoto/$_uid", profilePhoto)
           .then((value) {
         userModel.profilePhoto = value;
-        userModel.createdAt = DateTime.now().millisecond.toString();
+        userModel.createdAt = DateTime.timestamp.toString();
         userModel.phoneNumber = _firebaseAuth.currentUser!.phoneNumber!;
         userModel.uid = _firebaseAuth.currentUser!.phoneNumber!;
       });
