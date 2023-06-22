@@ -403,7 +403,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
             selectedStyle: mySelectedStyle,
             colorLineSelected: Colors.white),
         SettingsPage(),
-      )
+      ),
     ];
     super.initState();
   }
