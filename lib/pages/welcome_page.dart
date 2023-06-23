@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
-import 'package:social/pages/register.dart';
+import 'package:social/pages/register_page.dart';
 
 import '../individualwidgets.dart';
 import 'home.dart';

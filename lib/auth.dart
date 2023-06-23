@@ -9,9 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social/individualwidgets.dart';
 import 'package:social/pages/home.dart';
 import 'package:social/pages/model.dart';
-import 'package:social/pages/register.dart';
+import 'package:social/pages/register_page.dart';
 
-import 'package:social/pages/verification.dart';
+import 'package:social/pages/verification_page.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool _isSignedIn = false;

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:social/firebase_options.dart';
 import 'package:social/pages/home.dart';
 
-import 'package:social/pages/welcome.dart';
+import 'package:social/pages/welcome_page.dart';
 
 import 'auth.dart';
 

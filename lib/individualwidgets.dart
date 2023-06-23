@@ -5,11 +5,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:social/pages/callspage.dart';
-import 'package:social/pages/chatpage.dart';
+import 'package:provider/provider.dart';
+
+import 'package:social/pages/calls_page.dart';
+import 'package:social/pages/chat_page.dart';
 import 'package:social/pages/home.dart';
-import 'package:social/pages/settingspage.dart';
-import 'package:social/pages/userinfo.dart';
+import 'package:social/pages/settings_page.dart';
+import 'package:social/pages/user_info_page.dart';
+import 'package:social/pages/welcome_page.dart';
+
+import 'auth.dart';
 
 // privacy policy
 class privacy_policy extends StatelessWidget {
@@ -355,71 +360,212 @@ Future<File?> pickImage(BuildContext context) async {
   return image;
 }
 
-// drawer menu
-class HiddenDrawer extends StatefulWidget {
-  const HiddenDrawer({super.key});
+// drawer
+class MyDrawer extends StatefulWidget {
+  const MyDrawer({super.key});
 
   @override
-  State<HiddenDrawer> createState() => _HiddenDrawerState();
+  State<MyDrawer> createState() => _MyDrawerState();
 }
 
-class _HiddenDrawerState extends State<HiddenDrawer> {
-  List<ScreenHiddenDrawer> _pages = [];
-  final myBaseStyle =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white);
-  final mySelectedStyle =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white);
-  @override
-  void initState() {
-    _pages = [
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-            name: "Social",
-            baseStyle: myBaseStyle,
-            selectedStyle: mySelectedStyle,
-            colorLineSelected: Colors.white),
-        Home(),
-      ),
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-            name: "Chats",
-            baseStyle: myBaseStyle,
-            selectedStyle: mySelectedStyle,
-            colorLineSelected: Colors.white),
-        ChatPage(),
-      ),
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-            name: "Calls",
-            baseStyle: myBaseStyle,
-            selectedStyle: mySelectedStyle,
-            colorLineSelected: Colors.white),
-        CallsPage(),
-      ),
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-            name: "Settings",
-            baseStyle: myBaseStyle,
-            selectedStyle: mySelectedStyle,
-            colorLineSelected: Colors.white),
-        SettingsPage(),
-      ),
-    ];
-    super.initState();
-  }
-
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
-    return HiddenDrawerMenu(
-      backgroundColorMenu: Colors.grey.shade600,
-      screens: _pages,
-      initPositionSelected: 0,
-      backgroundColorAppBar: Colors.grey,
-      slidePercent: 50,
-      contentCornerRadius: 40,
-      curveAnimation: Curves.bounceIn,
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    // File? image;
+
+    return Drawer(
+      backgroundColor: Colors.grey[900],
+      child: Column(
+        children: [
+          // HEADER
+          DrawerHeader(
+            child: GestureDetector(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                  ap.userModel.profilePhoto,
+                ),
+              ),
+            ),
+          ),
+          Text(
+            (ap.userModel.name),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Text(
+            ap.userModel.phoneNumber,
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Divider(),
+          ),
+          // LIST OF PAGES
+          MyListTile(
+            icon: Icons.home,
+            text: 'S O C I A L',
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ));
+            },
+          ),
+          MyListTile(
+            icon: Icons.chat,
+            text: 'C H A T S',
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatPage(),
+                  ));
+            },
+          ),
+          MyListTile(
+            icon: Icons.call,
+            text: 'C A L L S',
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CallsPage(),
+                  ));
+            },
+          ),
+          MyListTile(
+            icon: Icons.settings,
+            text: 'S E T T I N G S',
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsPage(),
+                  ));
+            },
+          ),
+          SizedBox(
+            height: 150,
+          ),
+          MyListTile(
+            icon: Icons.logout,
+            text: 'S I G N O U T',
+            onTap: () {
+              ap.signOut().then((value) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WelcomePage(),
+                  )));
+            },
+          )
+          // LOG OUT
+        ],
+      ),
     );
   }
 }
 
-// drawer default
+class MyListTile extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final void Function()? onTap;
+  const MyListTile({
+    Key? key,
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final style = TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    );
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: Colors.white,
+        ),
+        title: Text(text, style: style),
+        onTap: onTap,
+      ),
+    );
+  }
+}
+
+// // drawer menu
+// class HiddenDrawer extends StatefulWidget {
+//   const HiddenDrawer({super.key});
+
+//   @override
+//   State<HiddenDrawer> createState() => _HiddenDrawerState();
+// }
+
+// class _HiddenDrawerState extends State<HiddenDrawer> {
+//   List<ScreenHiddenDrawer> _pages = [];
+//   final myBaseStyle =
+//       TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white);
+//   final mySelectedStyle =
+//       TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white);
+//   @override
+//   void initState() {
+//     _pages = [
+//       ScreenHiddenDrawer(
+//         ItemHiddenMenu(
+//             name: "Social",
+//             baseStyle: myBaseStyle,
+//             selectedStyle: mySelectedStyle,
+//             colorLineSelected: Colors.white),
+//         Home(),
+//       ),
+//       ScreenHiddenDrawer(
+//         ItemHiddenMenu(
+//             name: "Chats",
+//             baseStyle: myBaseStyle,
+//             selectedStyle: mySelectedStyle,
+//             colorLineSelected: Colors.white),
+//         ChatPage(),
+//       ),
+//       ScreenHiddenDrawer(
+//         ItemHiddenMenu(
+//             name: "Calls",
+//             baseStyle: myBaseStyle,
+//             selectedStyle: mySelectedStyle,
+//             colorLineSelected: Colors.white),
+//         CallsPage(),
+//       ),
+//       ScreenHiddenDrawer(
+//         ItemHiddenMenu(
+//             name: "Settings",
+//             baseStyle: myBaseStyle,
+//             selectedStyle: mySelectedStyle,
+//             colorLineSelected: Colors.white),
+//         SettingsPage(),
+//       ),
+//     ];
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return HiddenDrawerMenu(
+//       backgroundColorMenu: Colors.grey.shade600,
+//       screens: _pages,
+//       initPositionSelected: 0,
+//       backgroundColorAppBar: Colors.grey,
+//       slidePercent: 50,
+//       contentCornerRadius: 40,
+//       curveAnimation: Curves.bounceIn,
+//     );
+//   }
+// }
+
+// // drawer default

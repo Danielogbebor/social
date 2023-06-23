@@ -49,7 +49,7 @@ class _UserInfoState extends State<UserInfo> {
               ap.setSignIn().then((value) {
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => HiddenDrawer()),
+                    MaterialPageRoute(builder: (context) => Home()),
                     (route) => false);
               });
             });

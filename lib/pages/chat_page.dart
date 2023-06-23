@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../individualwidgets.dart';
+
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
@@ -11,6 +13,8 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: MyDrawer(),
       body: Center(
         child: Text("chatpage"),
       ),

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
 import 'package:social/individualwidgets.dart';
 import 'package:social/pages/home.dart';
-import 'package:social/pages/userinfo.dart';
+import 'package:social/pages/user_info_page.dart';
 
 class Verification extends StatefulWidget {
   final String smsId;
@@ -35,7 +35,7 @@ class _VerificationState extends State<Verification> {
                 .then((value) => ap.setSignIn().then((value) => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HiddenDrawer(),
+                      builder: (context) => Home(),
                     )))));
           } else {
             Navigator.pushAndRemoveUntil(
