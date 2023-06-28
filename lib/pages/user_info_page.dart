@@ -49,7 +49,7 @@ class _UserInfoState extends State<UserInfo> {
               ap.setSignIn().then((value) {
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => Home()),
+                    MaterialPageRoute(builder: (context) => const Home()),
                     (route) => false);
               });
             });
@@ -94,13 +94,13 @@ class _UserInfoState extends State<UserInfo> {
                 children: [
                   InkWell(
                     child: image == null
-                        ? CircleAvatar(
+                        ? const CircleAvatar(
                             backgroundColor: Colors.transparent,
+                            radius: 50,
                             child: Icon(
                               Icons.add_a_photo,
                               size: 40,
                             ),
-                            radius: 50,
                           )
                         : CircleAvatar(
                             backgroundImage: FileImage(image!),
@@ -120,13 +120,13 @@ class _UserInfoState extends State<UserInfo> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 50, right: 50),
+                      padding: const EdgeInsets.only(left: 50, right: 50),
                       child: MyTextfield(
                         textAlign: TextAlign.left,
                         hintText: "Enter your name ",
                         controller: nameController,
                         keyboardType: TextInputType.name,
-                        suffixIcon: Icon(
+                        suffixIcon: const Icon(
                           Icons.emoji_emotions,
                           size: 30,
                         ),
@@ -141,13 +141,13 @@ class _UserInfoState extends State<UserInfo> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 50, right: 50),
+                      padding: const EdgeInsets.only(left: 50, right: 50),
                       child: MyTextfield(
                         textAlign: TextAlign.left,
                         hintText: "Bio ",
                         controller: bioController,
                         keyboardType: TextInputType.name,
-                        suffixIcon: Icon(
+                        suffixIcon: const Icon(
                           Icons.emoji_emotions,
                           size: 30,
                         ),
@@ -158,7 +158,7 @@ class _UserInfoState extends State<UserInfo> {
                   )
                 ],
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               MyButton(
                 text: "Next",
                 onPressed: () {

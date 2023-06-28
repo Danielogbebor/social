@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +9,6 @@ import 'package:social/pages/calls_page.dart';
 import 'package:social/pages/chat_page.dart';
 import 'package:social/pages/home.dart';
 import 'package:social/pages/settings_page.dart';
-import 'package:social/pages/user_info_page.dart';
 import 'package:social/pages/welcome_page.dart';
 
 import 'auth.dart';

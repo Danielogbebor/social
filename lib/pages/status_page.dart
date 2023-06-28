@@ -10,7 +10,7 @@ class StatusPage extends StatefulWidget {
 class _StatusPageState extends State<StatusPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text("statuspage"),
       ),

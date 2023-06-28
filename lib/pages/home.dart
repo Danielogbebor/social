@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/individualwidgets.dart';
-import 'package:social/pages/welcome_page.dart';
 
 import '../auth.dart';
 
@@ -20,7 +19,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.amber,
       appBar: AppBar(
         // automaticallyImplyLeading: false,
-        title: Text("Social"),
+        title: const Text("Social"),
       ),
       drawer: const MyDrawer(),
       body:

@@ -7,9 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social/individualwidgets.dart';
-import 'package:social/pages/home.dart';
 import 'package:social/pages/model.dart';
-import 'package:social/pages/register_page.dart';
 
 import 'package:social/pages/verification_page.dart';
 
