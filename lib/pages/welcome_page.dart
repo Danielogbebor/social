@@ -4,7 +4,7 @@ import 'package:social/auth.dart';
 import 'package:social/pages/register_page.dart';
 
 import '../individualwidgets.dart';
-import 'home.dart';
+import 'social.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({
@@ -56,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     await ap.getDataSP().whenComplete(() => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Home(),
+                          builder: (context) => const Social(),
                         )));
                   } else {
                     Navigator.push(

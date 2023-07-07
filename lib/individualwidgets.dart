@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'package:social/pages/calls_page.dart';
 import 'package:social/pages/chat_page.dart';
-import 'package:social/pages/home.dart';
+import 'package:social/pages/social.dart';
 import 'package:social/pages/settings_page.dart';
 import 'package:social/pages/welcome_page.dart';
 
@@ -408,7 +408,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Home(),
+                    builder: (context) => Social(),
                   ));
             },
           ),
@@ -419,7 +419,10 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatPage(),
+                    builder: (context) => ChatPage(
+                        // receiverPhoneNumber: '',
+                        // receiverUID: '',
+                        ),
                   ));
             },
           ),

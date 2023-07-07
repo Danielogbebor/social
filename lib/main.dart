@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/firebase_options.dart';
-import 'package:social/pages/home.dart';
+import 'package:social/pages/social.dart';
 
 import 'package:social/pages/welcome_page.dart';
 
@@ -53,7 +53,7 @@ class Authentication extends StatelessWidget {
         builder: (context, snapshot) {
           // login
           if (snapshot.hasData) {
-            return const Home();
+            return const Social();
           } else {
             return const WelcomePage();
           }

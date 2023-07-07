@@ -3,7 +3,7 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
 import 'package:social/individualwidgets.dart';
-import 'package:social/pages/home.dart';
+import 'package:social/pages/social.dart';
 import 'package:social/pages/user_info_page.dart';
 
 class Verification extends StatefulWidget {
@@ -35,7 +35,7 @@ class _VerificationState extends State<Verification> {
                 .then((value) => ap.setSignIn().then((value) => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Home(),
+                      builder: (context) => const Social(),
                     )))));
           } else {
             Navigator.pushAndRemoveUntil(

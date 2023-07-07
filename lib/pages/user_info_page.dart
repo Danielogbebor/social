@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social/auth.dart';
 import 'package:social/individualwidgets.dart';
-import 'package:social/pages/home.dart';
+import 'package:social/pages/social.dart';
 import 'package:social/pages/model.dart';
 
 class UserInfo extends StatefulWidget {
@@ -49,7 +49,7 @@ class _UserInfoState extends State<UserInfo> {
               ap.setSignIn().then((value) {
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const Home()),
+                    MaterialPageRoute(builder: (context) => const Social()),
                     (route) => false);
               });
             });
