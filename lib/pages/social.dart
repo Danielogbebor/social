@@ -26,19 +26,20 @@ class _HomeState extends State<Social> {
         title: const Text("Social"),
       ),
       drawer: const MyDrawer(),
-      body: _buildContact(),
-      //
+      body:
+          // _buildContact(),
+          //
 
-      //     Center(
-      //   child: Column(
-      //     children: [
-      //       Text(ap.userModel.name),
-      //       Text(ap.userModel.phoneNumber),
-      //       Text(ap.userModel.uid),
-      //       Text(ap.userModel.createdAt),
-      //     ],
-      //   ),
-      // ),
+          Center(
+        child: Column(
+          children: [
+            Text(ap.userModel.name),
+            Text(ap.userModel.phoneNumber),
+            Text(ap.userModel.uid),
+            Text(ap.userModel.createdAt),
+          ],
+        ),
+      ),
     );
   }
 
@@ -64,7 +65,7 @@ class _HomeState extends State<Social> {
 
   // individual userlist item
   Widget _buildContactItem(DocumentSnapshot document) {
-    Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     // display all userlist items
     if (_auth.currentUser!.phoneNumber != data["phoneNumber"]) {
       return ListTile(

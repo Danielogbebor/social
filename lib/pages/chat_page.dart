@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:social/pages/contact_page.dart';
 
 import '../individualwidgets.dart';
 
@@ -21,8 +22,25 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiverPhoneNumber),
-      ),
+          backgroundColor: Colors.black,
+          // title: Text(widget.receiverPhoneNumber),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ContactPage(),
+                      ));
+                },
+                icon: Icon(Icons.contact_phone),
+                color: Colors.white,
+                iconSize: 30,
+              ),
+            )
+          ]),
       drawer: const MyDrawer(),
       body: const Center(
         child: Text("chatpage"),

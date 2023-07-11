@@ -420,9 +420,9 @@ class _MyDrawerState extends State<MyDrawer> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ChatPage(
-                        // receiverPhoneNumber: '',
-                        // receiverUID: '',
-                        ),
+                      receiverPhoneNumber: '',
+                      receiverUID: '',
+                    ),
                   ));
             },
           ),
